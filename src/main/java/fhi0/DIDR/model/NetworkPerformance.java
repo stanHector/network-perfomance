@@ -19,6 +19,7 @@ public class NetworkPerformance {
     private String location;
     private String ratePerformance;
     private String ticketId;
+    private String imgUrl;
 
     private Long userId;
 
@@ -81,5 +82,13 @@ public class NetworkPerformance {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

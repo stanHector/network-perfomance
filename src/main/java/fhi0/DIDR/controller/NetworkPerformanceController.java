@@ -38,6 +38,8 @@ public class NetworkPerformanceController {
 
     @PostMapping("performance")
     ResponseEntity<Object> createPerformance(@Valid @RequestBody NetworkPerformance networkPerformance) {
+
+        networkPerformance.setImgUrl("Image upload not available yet");
         return new ResponseEntity<>(networkPerformanceRepository.save(networkPerformance), HttpStatus.CREATED);
     }
 
