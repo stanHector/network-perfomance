@@ -19,30 +19,12 @@ public class NetworkPerformance {
     private String location;
     private String ratePerformance;
     private String ticketId;
-    @Column(nullable = true, length = 64)
-    private String image;
-
-    @Transient
-    public String getPhotosImagePath() {
-        if (image == null){ return null;}
-
-        return "/performance-photos/" + id + "/" + image;
-    }
 
     private Long userId;
 
     public NetworkPerformance() {
     }
 
-//    public NetworkPerformance(String date, String name, String location, String ratePerformance, String ticketId, Image performanceImage, Long userId) {
-//        this.date = date;
-//        this.name = name;
-//        this.location = location;
-//        this.ratePerformance = ratePerformance;
-//        this.ticketId = ticketId;
-//        this.performanceImage = performanceImage;
-//        this.userId = userId;
-//    }
 
     public long getId() {
         return id;
@@ -68,13 +50,6 @@ public class NetworkPerformance {
         this.ticketId = ticketId;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getName() {
         return name;
