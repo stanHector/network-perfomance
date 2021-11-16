@@ -1,0 +1,1 @@
+INSERT INTO users(firstname, lastname, user_type, email, states,  password) VALUES('Super', 'Admin', 'Admin', 'admin@fhi.org','Country Office','$2y$12$ZId7KZzfUI046edppuN.Uugp8SEYT1AofMkpar1NGFRU/IRGVd0mS');
