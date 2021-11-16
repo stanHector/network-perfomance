@@ -19,8 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "https://network-performance.herokuapp.com")
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://network-performance.herokuapp.com")
 @RestController
 @RequestMapping("/api/v1/")
 public class NetworkPerformanceController {
@@ -38,11 +38,8 @@ public class NetworkPerformanceController {
 
     @PostMapping("performance")
     ResponseEntity<Object> createPerformance(@Valid @RequestBody NetworkPerformance networkPerformance) {
-
-        networkPerformance.setImgUrl("Image upload not available yet");
         return new ResponseEntity<>(networkPerformanceRepository.save(networkPerformance), HttpStatus.CREATED);
     }
-
 
 
 //    @PostMapping("performance")
