@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@CrossOrigin(origins = "https://network-performance.herokuapp.com")
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/v1/")
