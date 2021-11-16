@@ -35,26 +35,26 @@ public class NetworkPerformanceController {
     }
 
 
-//    @PostMapping("performance")
-//    ResponseEntity<Object> createPerformance(@Valid @RequestBody NetworkPerformance networkPerformance) {
-//        return new ResponseEntity<>(networkPerformanceRepository.save(networkPerformance), HttpStatus.CREATED);
-//    }
-//
-
-
     @PostMapping("performance")
-    ResponseEntity<Object> createPerformance(@Valid NetworkPerformance networkPerformance, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        networkPerformance.setImage(fileName);
-
-        NetworkPerformance savedPerformance = networkPerformanceRepository.save(networkPerformance);
-
-        String uploadDir = "performance-photos/" + savedPerformance.getId();
-
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
-        return new ResponseEntity<>(networkPerformanceRepository.save(savedPerformance), HttpStatus.CREATED);
+    ResponseEntity<Object> createPerformance(@Valid @RequestBody NetworkPerformance networkPerformance) {
+        return new ResponseEntity<>(networkPerformanceRepository.save(networkPerformance), HttpStatus.CREATED);
     }
+
+
+
+//    @PostMapping("performance")
+//    ResponseEntity<Object> createPerformance(@Valid @RequestBody NetworkPerformance networkPerformance, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//        networkPerformance.setImage(fileName);
+//
+//        NetworkPerformance savedPerformance = networkPerformanceRepository.save(networkPerformance);
+//
+//        String uploadDir = "performance-photos/" + savedPerformance.getId();
+//
+//        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+//
+//        return new ResponseEntity<>(networkPerformanceRepository.save(savedPerformance), HttpStatus.CREATED);
+//    }
 
 
 //
