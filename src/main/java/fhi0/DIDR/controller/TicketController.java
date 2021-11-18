@@ -31,10 +31,11 @@ public class TicketController {
 //        return ticketRepository.findAll(Sort.by("date").ascending());
 //    }
 
-    @GetMapping("/tickets")
+    @GetMapping("tickets")
     public Page<Ticket> getAllTickets(Pageable pageable) {
         return ticketRepository.findAll(pageable);
     }
+
 
     @PostMapping("tickets")
     ResponseEntity<Object> createTicket(@Valid @RequestBody Ticket ticket) {
