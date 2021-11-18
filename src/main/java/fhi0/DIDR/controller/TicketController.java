@@ -32,7 +32,7 @@ public class TicketController {
 //    }
 
     @GetMapping("tickets")
-    public Page<Ticket> getAllTickets(Pageable pageable) {
+    public Page<Ticket> getTickets(Pageable pageable) {
         return ticketRepository.findAll(pageable);
     }
 
