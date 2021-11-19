@@ -2,9 +2,12 @@ package fhi0.DIDR.controller;
 
 import fhi0.DIDR.dto.NetworkPerformanceDto;
 import fhi0.DIDR.exception.ResourceNotFoundException;
+import fhi0.DIDR.model.InternetDowntime;
 import fhi0.DIDR.model.NetworkPerformance;
 import fhi0.DIDR.repository.NetworkPerformanceRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +26,15 @@ import java.util.*;
 public class NetworkPerformanceController {
     private final NetworkPerformanceRepository networkPerformanceRepository;
 
+//    @GetMapping("performance")
+//    List<NetworkPerformance> getNetworkPerformance() {
+//        return networkPerformanceRepository.findAll(Sort.by("date").descending());
+//    }
+
+
     @GetMapping("performance")
-    List<NetworkPerformance> getNetworkPerformance() {
-        return networkPerformanceRepository.findAll(Sort.by("date").descending());
+    public Page<NetworkPerformance> getNetworkPerformance(Pageable pageable) {
+        return networkPerformanceRepository.findAll(pageable);
     }
 
 

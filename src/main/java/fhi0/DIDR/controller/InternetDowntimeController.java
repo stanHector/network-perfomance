@@ -1,25 +1,19 @@
 package fhi0.DIDR.controller;
 
 import fhi0.DIDR.dto.InternetDowntimeDto;
-import fhi0.DIDR.dto.UserDto;
 import fhi0.DIDR.exception.ResourceNotFoundException;
 import fhi0.DIDR.model.InternetDowntime;
-import fhi0.DIDR.model.Ticket;
-import fhi0.DIDR.model.Users;
 import fhi0.DIDR.repository.InternetDowntimeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 //@CrossOrigin(origins = "http://localhost:3000")
