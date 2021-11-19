@@ -4,11 +4,14 @@ import fhi0.DIDR.dto.InternetDowntimeDto;
 import fhi0.DIDR.dto.UserDto;
 import fhi0.DIDR.exception.ResourceNotFoundException;
 import fhi0.DIDR.model.InternetDowntime;
+import fhi0.DIDR.model.Ticket;
 import fhi0.DIDR.model.Users;
 import fhi0.DIDR.repository.InternetDowntimeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,18 +37,17 @@ public class InternetDowntimeController {
         this.internetDowntimeRepository = internetDowntimeRepository;
     }
 
+    //    @GetMapping("downtimes")
+//    List<InternetDowntime> getDowntime() {
+//        return internetDowntimeRepository.findAll(Sort.by("date").descending());
+//    }
+//
     @GetMapping("downtimes")
-    List<InternetDowntime> getDowntime() {
-        return internetDowntimeRepository.findAll(Sort.by("date").descending());
+    public Page<InternetDowntime> getDowntime(Pageable pageable) {
+        return internetDowntimeRepository.findAll(pageable);
     }
 
-//    @GetMapping("assets")
-//    Page<InternetDowntimeDto> getAssets(Pageable pageable) {
-//        return assetRepository.findAll(pageable);
-//
-//    }
-
-    //get asset by Id
+    //get downtime by Id
     @GetMapping("downtime/{id}")
     public ResponseEntity<InternetDowntime> getDowntimeById(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {
