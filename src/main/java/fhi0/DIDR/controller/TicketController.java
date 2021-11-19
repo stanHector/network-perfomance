@@ -5,6 +5,8 @@ import fhi0.DIDR.exception.ResourceNotFoundException;
 import fhi0.DIDR.model.Ticket;
 import fhi0.DIDR.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +25,15 @@ public class TicketController {
     @Autowired
     TicketRepository ticketRepository;
 
-    @GetMapping("tickets")
-    Iterable<Ticket> getTickets() {
-        return ticketRepository.findAll(Sort.by("date").ascending());
-    }
-
 //    @GetMapping("tickets")
-//    public Page<Ticket> getTickets(Pageable pageable) {
-//        return ticketRepository.findAll(pageable);
+//    Iterable<Ticket> getTickets() {
+//        return ticketRepository.findAll(Sort.by("date").ascending());
 //    }
+
+    @GetMapping("tickets")
+    public Page<Ticket> getTickets(Pageable pageable) {
+        return ticketRepository.findAll(pageable);
+    }
 
 
     @PostMapping("tickets")
