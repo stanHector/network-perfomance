@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 
 //@CrossOrigin(origins = "http://localhost:3000")
@@ -26,15 +23,15 @@ public class TicketController {
     @Autowired
     TicketRepository ticketRepository;
 
-//    @GetMapping("tickets")
-//    List<Ticket> getTickets() {
-//        return ticketRepository.findAll(Sort.by("date").ascending());
-//    }
-
     @GetMapping("tickets")
-    public Page<Ticket> getTickets(Pageable pageable) {
-        return ticketRepository.findAll(pageable);
+    Iterable<Ticket> getTickets() {
+        return ticketRepository.findAll(Sort.by("date").ascending());
     }
+
+//    @GetMapping("tickets")
+//    public Page<Ticket> getTickets(Pageable pageable) {
+//        return ticketRepository.findAll(pageable);
+//    }
 
 
     @PostMapping("tickets")
