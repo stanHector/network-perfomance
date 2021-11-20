@@ -7,18 +7,18 @@ import fhi0.DIDR.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "https://network-performance.netlify.app")
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://network-performance.netlify.app")
 @RestController
 @RequestMapping("api/v1/")
 public class TicketController {
@@ -35,8 +35,17 @@ public class TicketController {
         return ticketRepository.findAll(pageable);
     }
 
+//    @PostMapping("/find/date-between")
+//    public ResponseEntity<Object> findTicketsByDate(@RequestBody DateSearchDto searcherDto) {
+//
+//        String start = searcherDto.getStartDate();
+//        String end = searcherDto.getEndDate();
+//        List<Ticket> ticketList =
+//                ticketRepository.getAllBetweenDates(start, end);
+//        return
+//    }
 
-    @PostMapping("tickets")
+        @PostMapping("tickets")
     ResponseEntity<Object> createTicket(@Valid @RequestBody Ticket ticket) {
         return new ResponseEntity<>(ticketRepository.save(ticket), HttpStatus.CREATED);
     }

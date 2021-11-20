@@ -6,6 +6,8 @@ import fhi0.DIDR.exception.ResourceNotFoundException;
 import fhi0.DIDR.model.Users;
 import fhi0.DIDR.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,11 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "https://network-performance.netlify.app")
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://network-performance.netlify.app")
 @RestController
 @RequestMapping("/api/v1/")
 public class UsersController {
@@ -27,13 +28,16 @@ public class UsersController {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+//
+//    @GetMapping("users")
+//    List<Users> getUsers() {
+//        return userRepository.findAll();
+//    }
 
     @GetMapping("users")
-    List<Users> getUsers() {
-
-        return userRepository.findAll();
+    public Page<Users> getUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
-
 
     //get user by Id
     @GetMapping("user/{id}")
@@ -42,6 +46,12 @@ public class UsersController {
         Users user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
         return ResponseEntity.ok().body(user);
+    }
+
+    // For searching
+    @GetMapping("users/{keyword}")
+    public Page<Users> getAllUsers(Pageable pageable, @PathVariable("keyword") String keyword) {
+        return userRepository.findAll(pageable, keyword);
     }
 
     //create user
