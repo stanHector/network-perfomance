@@ -16,8 +16,8 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
-//@CrossOrigin(origins = "https://network-performance.netlify.app")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://network-performance.netlify.app")
 @RestController
 @RequestMapping("/api/v1/")
 @AllArgsConstructor
