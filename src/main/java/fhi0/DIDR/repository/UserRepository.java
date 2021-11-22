@@ -16,7 +16,5 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     @Query("from Users u where u.firstname =:keyword OR u.email=:keyword OR u.states=:keyword")
     Page<Users> findAll(Pageable pageable, @Param("keyword") String keyword);
-//    @Query("from Users u where u.firstname =:keyword OR u.lastname=:keyword OR u.email=:keyword OR u.states=:keyword OR u.userType=:keyword")
-//    Page<Users> findAll(Pageable pageable, @Param("keyword") String keyword);
 
 }

@@ -9,12 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 //@CrossOrigin(origins = "http://localhost:3000")
 @CrossOrigin(origins = "https://network-performance.netlify.app")
@@ -24,17 +25,10 @@ import java.util.*;
 public class NetworkPerformanceController {
     private final NetworkPerformanceRepository networkPerformanceRepository;
 
-//    @GetMapping("performance")
-//    List<NetworkPerformance> getNetworkPerformance() {
-//        return networkPerformanceRepository.findAll(Sort.by("date").descending());
-//    }
-
-
     @GetMapping("performance")
     public Page<NetworkPerformance> getNetworkPerformance(Pageable pageable) {
-        return networkPerformanceRepository.findAll(pageable);
+        return networkPerformanceRepository.findByOrderByDateDesc(pageable);
     }
-
 
     @PostMapping("performance")
     ResponseEntity<Object> createPerformance(@Valid @RequestBody NetworkPerformance networkPerformance) {
@@ -58,24 +52,24 @@ public class NetworkPerformanceController {
     }
 
 
-    @GetMapping("get-performance")
-    public ResponseEntity<List<NetworkPerformanceDto>> getPerformance() throws UnsupportedEncodingException {
-        List<NetworkPerformance> networkPerformanceList = this.networkPerformanceRepository.findAll();
-        List<NetworkPerformanceDto> networkPerformanceList1 = new ArrayList<>();
-        networkPerformanceList.stream().forEach(networkPerformance -> {
-            NetworkPerformanceDto networkPerformance1 = new NetworkPerformanceDto();
-            String encodedText = Base64Utils.encodeToString(networkPerformance.getImgUrl());
-            networkPerformance1.setImgUrl(encodedText);
-            networkPerformance1.setDate(networkPerformance.getDate());
-            networkPerformance1.setName(networkPerformance.getName());
-            networkPerformance1.setLocation(networkPerformance.getLocation());
-            networkPerformance1.setRatePerformance(networkPerformance.getRatePerformance());
-            networkPerformance1.setTicketId(networkPerformance.getTicketId());
-            networkPerformanceList1.add(networkPerformance1);
-        });
-        return ResponseEntity.ok(networkPerformanceList1);
-
-    }
+//    @GetMapping("get-performance")
+//    public ResponseEntity<List<NetworkPerformanceDto>> getPerformance() throws UnsupportedEncodingException {
+//        List<NetworkPerformance> networkPerformanceList = this.networkPerformanceRepository.findAll();
+//        List<NetworkPerformanceDto> networkPerformanceList1 = new ArrayList<>();
+//        networkPerformanceList.stream().forEach(networkPerformance -> {
+//            NetworkPerformanceDto networkPerformance1 = new NetworkPerformanceDto();
+//            String encodedText = Base64Utils.encodeToString(networkPerformance.getImgUrl());
+//            networkPerformance1.setImgUrl(encodedText);
+//            networkPerformance1.setDate(networkPerformance.getDate());
+//            networkPerformance1.setName(networkPerformance.getName());
+//            networkPerformance1.setLocation(networkPerformance.getLocation());
+//            networkPerformance1.setRatePerformance(networkPerformance.getRatePerformance());
+//            networkPerformance1.setTicketId(networkPerformance.getTicketId());
+//            networkPerformanceList1.add(networkPerformance1);
+//        });
+//        return ResponseEntity.ok(networkPerformanceList1);
+//
+//    }
 
 
     @DeleteMapping("performance/{id}")

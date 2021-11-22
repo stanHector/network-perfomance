@@ -24,27 +24,13 @@ public class TicketController {
     @Autowired
     TicketRepository ticketRepository;
 
-//    @GetMapping("tickets")
-//    Iterable<Ticket> getTickets() {
-//        return ticketRepository.findAll(Sort.by("date").ascending());
-//    }
-
     @GetMapping("tickets")
     public Page<Ticket> getTickets(Pageable pageable) {
-        return ticketRepository.findAll(pageable);
+        return ticketRepository.findByOrderByDateDesc(pageable);
     }
 
-//    @PostMapping("/find/date-between")
-//    public ResponseEntity<Object> findTicketsByDate(@RequestBody DateSearchDto searcherDto) {
-//
-//        String start = searcherDto.getStartDate();
-//        String end = searcherDto.getEndDate();
-//        List<Ticket> ticketList =
-//                ticketRepository.getAllBetweenDates(start, end);
-//        return
-//    }
 
-        @PostMapping("tickets")
+    @PostMapping("tickets")
     ResponseEntity<Object> createTicket(@Valid @RequestBody Ticket ticket) {
         return new ResponseEntity<>(ticketRepository.save(ticket), HttpStatus.CREATED);
     }

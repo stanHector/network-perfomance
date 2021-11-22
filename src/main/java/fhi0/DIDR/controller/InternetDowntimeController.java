@@ -31,14 +31,9 @@ public class InternetDowntimeController {
         this.internetDowntimeRepository = internetDowntimeRepository;
     }
 
-    //    @GetMapping("downtimes")
-//    List<InternetDowntime> getDowntime() {
-//        return internetDowntimeRepository.findAll(Sort.by("date").descending());
-//    }
-//
     @GetMapping("downtimes")
     public Page<InternetDowntime> getDowntime(Pageable pageable) {
-        return internetDowntimeRepository.findAll(pageable);
+        return internetDowntimeRepository.findByOrderByDateDesc(pageable);
     }
 
     //get downtime by Id
