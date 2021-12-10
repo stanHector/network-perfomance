@@ -28,9 +28,15 @@ public class NetworkPerformanceController {
     private final NetworkPerformanceRepository networkPerformanceRepository;
 
     @GetMapping("performances")
-    public Page<NetworkPerformance> getNetworkPerformance(Pageable pageable){
-        return networkPerformanceRepository.findByOrderByDateDesc( pageable);
+    public Page<NetworkPerformance> getNetworkPerformance(Pageable pageable) {
+        return networkPerformanceRepository.findByOrderByDateDesc(pageable);
     }
+
+    @PostMapping("performance")
+    ResponseEntity<Object> createNetworkPerformance(@RequestBody NetworkPerformance networkPerformance) {
+        return new ResponseEntity<>(networkPerformanceRepository.save(networkPerformance), HttpStatus.CREATED);
+    }
+
 
 //    @PostMapping(value = "save-performance")
 //    public ResponseEntity<NetworkPerformance> createPerformance(@Valid @RequestBody NetworkPerformance networkPerformance) throws UnsupportedEncodingException {
@@ -46,32 +52,32 @@ public class NetworkPerformanceController {
 //        return ResponseEntity.ok(networkPerformance);
 //    }
 
-    @PostMapping(value = "performance", produces = "application/json", consumes = {"multipart/form-data"})
-    public ResponseEntity<NetworkPerformance> createPerformance(@RequestParam("imageFile") MultipartFile file,
-                                                                @RequestParam("date") String date,
-                                                                @RequestParam("name") String name,
-                                                                @RequestParam("location") String location,
-                                                                @RequestParam("ratePerformance") String ratePerformance,
-                                                                @RequestParam("ticketId") String ticketId,
-                                                                @RequestParam("userId") Long userId) {
-        NetworkPerformance networkPerformance = new NetworkPerformance();
-        networkPerformance.setDate(date);
-        networkPerformance.setName(name);
-        String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        if (filename.contains("..")) {
-            System.out.println("Not a valid file!");
-        }
-        try {
-            networkPerformance.setImageFile(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        networkPerformance.setRatePerformance(ratePerformance);
-        networkPerformance.setLocation(location);
-        networkPerformance.setTicketId(ticketId);
-        networkPerformance.setUserId(userId);
-        return new ResponseEntity<>(networkPerformanceRepository.save(networkPerformance), HttpStatus.CREATED);
-    }
+//    @PostMapping(value = "performance", produces = "application/json", consumes = {"multipart/form-data"})
+//    public ResponseEntity<NetworkPerformance> createPerformance(@RequestParam("imageFile") MultipartFile file,
+//                                                                @RequestParam("date") String date,
+//                                                                @RequestParam("name") String name,
+//                                                                @RequestParam("location") String location,
+//                                                                @RequestParam("ratePerformance") String ratePerformance,
+//                                                                @RequestParam("ticketId") String ticketId,
+//                                                                @RequestParam("userId") Long userId) {
+//        NetworkPerformance networkPerformance = new NetworkPerformance();
+//        networkPerformance.setDate(date);
+//        networkPerformance.setName(name);
+//        String filename = StringUtils.cleanPath(file.getOriginalFilename());
+//        if (filename.contains("..")) {
+//            System.out.println("Not a valid file!");
+//        }
+//        try {
+//            networkPerformance.setImageFile(file.getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        networkPerformance.setRatePerformance(ratePerformance);
+//        networkPerformance.setLocation(location);
+//        networkPerformance.setTicketId(ticketId);
+//        networkPerformance.setUserId(userId);
+//        return new ResponseEntity<>(networkPerformanceRepository.save(networkPerformance), HttpStatus.CREATED);
+//    }
 
 
 //    @GetMapping("get-performance")
