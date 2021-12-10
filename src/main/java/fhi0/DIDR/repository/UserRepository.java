@@ -8,13 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long> {
     Users findByEmail(String email);
 
     Users getByEmail(String email);
 
-    @Query("from Users u where u.firstname =:keyword OR u.email=:keyword OR u.states=:keyword")
+    @Query("Select u from Users u where u.firstname =:keyword OR u.email=:keyword OR u.states=:keyword")
     Page<Users> findAll(Pageable pageable, @Param("keyword") String keyword);
 
 }

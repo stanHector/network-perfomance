@@ -7,13 +7,18 @@ import fhi0.DIDR.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 
 //@CrossOrigin(origins = "http://localhost:3000")
@@ -29,6 +34,24 @@ public class TicketController {
         return ticketRepository.findByOrderByDateDesc(pageable);
     }
 
+//    @GetMapping("tickets")
+//    public Page<Ticket> getTickets(Pageable pageable) {
+//        Calendar calendar = Calendar.getInstance();
+//        String pattern = "yyyy-MM-dd";
+//        DateFormat dateFormat = new SimpleDateFormat(pattern);
+//        Date today = calendar.getTime();
+//        String todayString = dateFormat.format(today);
+//
+//        calendar.add(Calendar.DAY_OF_MONTH, -7);
+//        Date sevenDaysBefore = calendar.getTime();
+//        String sevenDaysBeforeString = dateFormat.format(sevenDaysBefore);
+//        return ticketRepository.findTicketCreatedAtBetween(pageable, todayString, sevenDaysBeforeString);
+//    }
+
+//    @GetMapping("all-tickets")
+//    public Page<Ticket> getAllTickets(LocalDateTime start, LocalDateTime end, Pageable pageable) {
+//        return ticketRepository.findByOrderByDateDesc(start, end, pageable);
+//    }
 
     @PostMapping("tickets")
     ResponseEntity<Object> createTicket(@Valid @RequestBody Ticket ticket) {

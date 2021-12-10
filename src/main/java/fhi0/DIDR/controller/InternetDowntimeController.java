@@ -3,9 +3,12 @@ package fhi0.DIDR.controller;
 import fhi0.DIDR.dto.InternetDowntimeDto;
 import fhi0.DIDR.exception.ResourceNotFoundException;
 import fhi0.DIDR.model.InternetDowntime;
+import fhi0.DIDR.model.Users;
 import fhi0.DIDR.repository.InternetDowntimeRepository;
+import fhi0.DIDR.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -13,14 +16,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 //@CrossOrigin(origins = "http://localhost:3000")
 @CrossOrigin(origins = "https://network-performance.netlify.app")
 @RestController
 @RequestMapping("/api/v1/")
 public class InternetDowntimeController {
+    @Autowired
+    UserRepository userRepository;
 
     private final InternetDowntimeRepository internetDowntimeRepository;
     private Logger logger = LoggerFactory.getLogger(InternetDowntimeController.class);
